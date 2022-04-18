@@ -6,15 +6,19 @@ import axios from 'axios';
 
 const rootUrl = 'https://api.github.com';
 
-const thing = 'hi im a thing';
-
 const GithubContext = React.createContext();
 // gives access to Provider and Consumer
 
 // dont wrap using this directly - GithubContext.Provider
 const GithubProvider = ({ children }) => {
+  const [githubUser, setGithubUser] = useState(mockUser);
+  const [repos, setRepos] = useState(mockRepos);
+  const [followers, setFollowers] = useState(mockFollowers);
+
   return (
-    <GithubContext.Provider value={thing}>{children}</GithubContext.Provider>
+    <GithubContext.Provider value={{ githubUser, repos, followers }}>
+      {children}
+    </GithubContext.Provider>
   );
 };
 
